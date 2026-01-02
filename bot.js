@@ -40,6 +40,26 @@ bot.start((ctx) => {
     ctx.reply("Xush kelibsiz! Men har kuni soat 07:00 da sizga ob-havo va valyuta kursini yuboraman.");
 });
 
+//buyruq qo'shish
+bot.command('weather', async (ctx) => {
+    const weather = await getWeather();
+    ctx.reply(weather);
+});
+
+bot.command('currency', async (ctx) => {
+    const currency = await getCurrency();
+    ctx.reply(currency);
+});
+bot.command('info', (ctx) => {
+    const infoMessage = `Men sizga har kuni ertalab ob-havo va valyuta kursini yuboraman.\n\n` +
+                        `Buyruqlar:\n` +
+                        `/weather - Ob-havo ma'lumotini olish\n` +
+                        `/currency - Valyuta kursini olish\n` +
+                        `/info - Bu xabar`;
+
+    ctx.reply(infoMessage);
+});
+
 // 3. Har kuni ertalab 07:00 da yuborish (Scheduling)
 // '0 7 * * *' -> Har kuni, soat 07, minut 00
 cron.schedule('0 7 * * *', async () => {
